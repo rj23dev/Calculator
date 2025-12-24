@@ -227,7 +227,7 @@ equal.addEventListener('click', () => {
 
         }
 
-        if(!(Number.isInteger(equals.value))){
+        if (!(Number.isInteger(equals.value))) {
 
             equals.value = equals.value.toFixed(4);
         }
@@ -250,3 +250,36 @@ equal.addEventListener('click', () => {
 
 
 
+
+let backspace = document.querySelector('#backspace');
+
+backspace.addEventListener('click', () => {
+
+
+    if (display.textContent === equals.value || display.textContent == "ERROR can't divide by zero") {
+
+        display.textContent = '';
+        second = "";
+        first = "";
+        operator = "";
+        return;
+    }
+
+    if (second === '' && operator === '') {
+        return;
+    }
+    else if (second !== '' && operator === '') {
+        second = second.slice(0, -1);
+        display.textContent = display.textContent.slice(0, -1);
+    }
+    else if (first !== '' && operator !== '' && second === '') {
+        operator = '';
+        second = first;
+        first = '';
+        display.textContent = display.textContent.slice(0, -1);
+    }
+    else if (first !== '' && operator !== '' && second !== '') {
+        second = second.slice(0, -1);
+        display.textContent = display.textContent.slice(0, -1);
+    }
+})
