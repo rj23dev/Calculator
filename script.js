@@ -107,67 +107,76 @@ let ops = document.querySelectorAll('.operator');
 ops.forEach((op) => {
 
     op.addEventListener('click', () => {
+        if(display.textContent=="ERROR can't divide by zero"){
+            display.textContent = "";
+        }
+        else if(op.textContent === '-'){
 
-        if (display.textContent == "") {
-            if (op.textContent === '-') {
-                second += op.textContent;
+            if(second=='' && operator==''){
+                second = op.textContent;
+                display.textContent = second;
+            }
+            else if(second !== '' && operator ===''){
+
+                operator = op.textContent;
+
+                first = second;
+
+                second = '';
+
+                display.textContent += op.textContent;
+
+
+            }
+
+
+            else if(first !== '' && operator !=='' && second ===''){
+                operator = op.textContent;
+                display.textContent = display.textContent.slice(0, -1) + op.textContent;
+            }
+            else if(first !=='' && operator !== '' && second !== ''){
+
+                result = operate(first, second, operator);
+
+                result = result.toString();
+
+                first = result;
+
+                operator = op.textContent;
+
+                second = '';
+
+                display.textContent = first + op.textContent;
+            }
+        }
+        else{
+            if(second !=='' && operator ===''){
+                operator = op.textContent;
+
+                first = second;
+                second = '';
 
                 display.textContent += op.textContent;
             }
+            else if(first !== '' && operator !=='' && second === ''){
+                operator = op.textContent;
 
-        }
-        /*else if(display.textContent.at(0) === '-' && display.textContent.at(1)!==''){
-          
-                     first = second;
-     
-                     second = '';
-     
-                     operator = op.textContent;
-     
-                     display.textContent += op.textContent;
-     
-                     console.log(first);
-                     console.log(operator);
-          
-        }*/
-        else if (display.textContent.at(-1) === ('+') || display.textContent.at(-1) === ('-')
-            || display.textContent.at(-1) === ('*') || display.textContent.at(-1) === ('/')) {
+                display.textContent = display.textContent.slice(0, -1) + op.textContent;
+            }
+            else if(first !== '' && operator !=='' && second !==''){
 
+                result = operate(first, second, operator);
 
-            display.textContent = display.textContent.slice(0, -1) + op.textContent;
+                result = result.toString();
 
-            operator = op.textContent;
+                first = result;
 
+                operator =op.textContent;
 
+                second = '';
 
-        }
-
-
-        else if (display.textContent.includes('+') || display.textContent.includes('-')
-            || display.textContent.includes('*') || display.textContent.includes('/')) {
-
-
-
-            result = operate(first, second, operator);
-
-            first = result.toString();
-
-            second = "";
-
-            display.textContent = result + op.textContent;
-
-            operator = op.textContent;
-
-            console.log(result);
-
-
-        }
-
-        else {
-            first = second;
-            second = "";
-            operator = op.textContent;
-            display.textContent += op.textContent;
+                display.textContent = first + op.textContent;
+            }
         }
 
 
