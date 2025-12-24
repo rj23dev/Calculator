@@ -1,37 +1,3 @@
-function add(a, b) {
-    return a + b;
-
-}
-
-//console.log(add(6,7));
-
-function subtract(a, b) {
-    return a - b;
-}
-
-//console.log(subtract(6,7));
-
-function multiply(a, b) {
-    return a * b;
-}
-
-//console.log(multiply(-6,-7));
-
-function divide(a, b) {
-
-    if (b === 0) {
-        return NaN;
-    }
-    else {
-        return Number((a / b).toFixed(2));
-    }
-}
-
-//console.log(divide(6,7));
-document.addEventListener('DOMContentLoaded', () => {
-    let display = document.querySelector('#display');
-    display.textContent = '';
-});
 
 let first = "";
 let second = "";
@@ -39,17 +5,43 @@ let operator = "";
 let result;
 let equals = {};
 
-let divByZero = false;
+let display = document.querySelector('#display');
 
+document.addEventListener('DOMContentLoaded', () => {
+
+    display.textContent = '';
+});
+
+
+function add(a, b) {
+    return a + b;
+
+}
+
+function subtract(a, b) {
+    return a - b;
+}
+
+function multiply(a, b) {
+    return a * b;
+}
+
+function divide(a, b) {
+
+    if (b === 0) {
+        return NaN;
+    }
+    else {
+        return Number(a / b);
+    }
+}
 
 function operate(firstN, secondN, op) {
 
     firstN = +firstN;
     secondN = +secondN;
 
-    console.log(first);
-    console.log(second);
-    console.log(operator);
+
 
     if (op === '+') {
         return add(firstN, secondN);
@@ -67,7 +59,7 @@ function operate(firstN, secondN, op) {
 
 let clear = document.querySelector('#clear');
 
-let display = document.querySelector('#display');
+
 
 clear.addEventListener('click', () => {
     display.textContent = '';
@@ -97,9 +89,40 @@ digits.forEach((digit) => {
         else {
             display.textContent += digit.textContent;
             second += digit.textContent
-            console.log(second);
+
         }
     })
+})
+
+
+let decimal = document.querySelector('.decimal');
+
+decimal.addEventListener('click', () => {
+
+
+    if (display.textContent === '') {
+
+        second = '0.';
+        display.textContent = second;
+    }
+    else if (display.textContent === equals.value) {
+
+        second = '0.';
+        display.textContent = second;
+    }
+    else if (display.textContent == "ERROR can't divide by zero") {
+
+        second = '0.';
+        display.textContent = second;
+
+    }
+    else if (!(second.includes('.'))) {
+
+        second += decimal.textContent;
+        display.textContent += '.';
+    }
+
+
 })
 
 let ops = document.querySelectorAll('.operator');
@@ -107,16 +130,16 @@ let ops = document.querySelectorAll('.operator');
 ops.forEach((op) => {
 
     op.addEventListener('click', () => {
-        if(display.textContent=="ERROR can't divide by zero"){
+        if (display.textContent == "ERROR can't divide by zero") {
             display.textContent = "";
         }
-        else if(op.textContent === '-'){
+        else if (op.textContent === '-') {
 
-            if(second=='' && operator==''){
+            if (second == '' && operator == '') {
                 second = op.textContent;
                 display.textContent = second;
             }
-            else if(second !== '' && operator ===''){
+            else if (second !== '' && operator === '') {
 
                 operator = op.textContent;
 
@@ -130,11 +153,11 @@ ops.forEach((op) => {
             }
 
 
-            else if(first !== '' && operator !=='' && second ===''){
+            else if (first !== '' && operator !== '' && second === '') {
                 operator = op.textContent;
                 display.textContent = display.textContent.slice(0, -1) + op.textContent;
             }
-            else if(first !=='' && operator !== '' && second !== ''){
+            else if (first !== '' && operator !== '' && second !== '') {
 
                 result = operate(first, second, operator);
 
@@ -149,8 +172,8 @@ ops.forEach((op) => {
                 display.textContent = first + op.textContent;
             }
         }
-        else{
-            if(second !=='' && operator ===''){
+        else {
+            if (second !== '' && operator === '') {
                 operator = op.textContent;
 
                 first = second;
@@ -158,12 +181,12 @@ ops.forEach((op) => {
 
                 display.textContent += op.textContent;
             }
-            else if(first !== '' && operator !=='' && second === ''){
+            else if (first !== '' && operator !== '' && second === '') {
                 operator = op.textContent;
 
                 display.textContent = display.textContent.slice(0, -1) + op.textContent;
             }
-            else if(first !== '' && operator !=='' && second !==''){
+            else if (first !== '' && operator !== '' && second !== '') {
 
                 result = operate(first, second, operator);
 
@@ -171,7 +194,7 @@ ops.forEach((op) => {
 
                 first = result;
 
-                operator =op.textContent;
+                operator = op.textContent;
 
                 second = '';
 
@@ -184,13 +207,15 @@ ops.forEach((op) => {
 })
 
 
+
 let equal = document.querySelector('#equal');
 
 equal.addEventListener('click', () => {
 
-    if (first === '' || second === "" || operator === '') { }
+    if (first === '' || second === "" || operator === '') { return; }
     else {
         equals.value = operate(first, second, operator);
+
         if (isNaN(equals.value)) {
             display.textContent = "ERROR can't divide by zero";
 
@@ -198,23 +223,30 @@ equal.addEventListener('click', () => {
             first = "";
             operator = "";
 
+            return;
+
         }
-        else {
 
-            equals.value = equals.value.toString();
-            first = ''; //result.toString();
+        if(!(Number.isInteger(equals.value))){
 
-            second = equals.value;
-            operator = '';
-
-            display.textContent = equals.value;
-
-
-
-            console.log(first);
-            console.log(second);
-            console.log(operator);
+            equals.value = equals.value.toFixed(4);
         }
+
+
+        equals.value = equals.value.toString();
+        first = '';
+
+        second = equals.value;
+        operator = '';
+
+        display.textContent = equals.value;
+
+
+
+
     }
 
 })
+
+
+
