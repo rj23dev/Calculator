@@ -147,6 +147,10 @@ ops.forEach((op) => {
             }
             else if (second !== '' && operator === '') {
 
+                if(second === "-"){
+                    return;
+                }
+
                 operator = op.textContent;
 
                 first = second;
