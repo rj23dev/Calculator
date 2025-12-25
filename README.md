@@ -21,7 +21,7 @@ Live Demo: [Calculator](https://rj23dev.github.io/Calculator/)
 
 ## Screenshot
 
-![Calculator Screenshot](./screenshot.png)
+![Calculator Screenshot](/screenshot/screenshot.png)
 
 ## How to Use
 
