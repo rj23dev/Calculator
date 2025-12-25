@@ -118,13 +118,13 @@ decimal.addEventListener('click', () => {
 
     }
     else if (!(second.includes('.'))) {
-        if(second ===''){
+        if (second === '') {
             second = '0.';
             display.textContent += second;
         }
-        else{
-        second += decimal.textContent;
-        display.textContent += '.';
+        else {
+            second += decimal.textContent;
+            display.textContent += '.';
         }
     }
 
@@ -147,7 +147,7 @@ ops.forEach((op) => {
             }
             else if (second !== '' && operator === '') {
 
-                if(second === "-"){
+                if (second === "-" || second === "0.") {
                     return;
                 }
 
@@ -165,17 +165,32 @@ ops.forEach((op) => {
 
             else if (first !== '' && operator !== '' && second === '') {
 
-                if(operator === '/' || operator === '*'){
+                if (operator === '/' || operator === '*') {
                     second = op.textContent;
                     display.textContent += second;
-                    
+
                 }
-                else{
-                operator = op.textContent;
-                display.textContent = display.textContent.slice(0, -1) + op.textContent;
+                else {
+                    operator = op.textContent;
+                    display.textContent = display.textContent.slice(0, -1) + op.textContent;
                 }
             }
             else if (first !== '' && operator !== '' && second !== '') {
+
+                if (second === '-') {
+                    return;
+                }
+
+                if ((second === '0' || second === '0.') && operator === '/') {
+
+                    display.textContent = "ERROR can't divide by zero";
+
+                    second = "";
+                    first = "";
+                    operator = "";
+
+                    return;
+                }
 
                 result = operate(first, second, operator);
 
@@ -193,7 +208,7 @@ ops.forEach((op) => {
         else {
             if (second !== '' && operator === '') {
 
-                if(second ==='-'){
+                if (second === '-' || second === "0.") {
                     return;
                 }
                 operator = op.textContent;
@@ -210,6 +225,21 @@ ops.forEach((op) => {
             }
             else if (first !== '' && operator !== '' && second !== '') {
 
+                if (second === '-') {
+                    return;
+                }
+
+                if ((second === '0' || second === '0.') && operator === '/') {
+
+                    display.textContent = "ERROR can't divide by zero";
+
+                    second = "";
+                    first = "";
+                    operator = "";
+
+                    return;
+                }
+                
                 result = operate(first, second, operator);
 
                 result = result.toString();
