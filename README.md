@@ -53,5 +53,5 @@ Live Demo: [Calculator](https://rj23dev.github.io/Calculator/)
 
 ## Credits
 
-Built by rj23dev while as a part of The Odin Project curriculum.
+Built by rj23dev as a part of The Odin Project curriculum.
 
