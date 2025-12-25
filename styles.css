@@ -1,5 +1,5 @@
 body {
-    font-family: Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    font-family: 'Open Sans', 'Helvetica Neue', sans-serif, Roboto, Oxygen, Ubuntu, Cantarell;
     margin: 0px;
     padding: 0px;
     min-height: 100vh;
@@ -21,9 +21,11 @@ body {
 }
 
 h1 {
+   
     text-align: center;
     color: #4A5BC6;
     font-size: 3rem;
+    
 }
 
 .calculator-wrapper {
@@ -91,6 +93,7 @@ button {
     box-shadow: 0 8px 15px rgba(0, 0, 0, 0.3);
     transform: translateY(-4px);
     transition: all 0.1s ease;
+    
 
 }
 
@@ -119,11 +122,13 @@ button {
 button:hover {
     box-shadow: 0 12px 25px rgba(0, 0, 0, 0.3);
     transform: translateY(-6px);
+    
 }
 
 button:active {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-    transform: translateY(2px);      
+    transform: translateY(2px);
+          
 }
 
 footer {
@@ -131,4 +136,16 @@ footer {
     text-align: center;
     font-size: 0.8rem;
     color: #4B5BC5;
+}
+
+
+footer a{
+
+    font-weight: bolder;
+}
+footer a:hover{
+
+    color: red;
+    font-weight: bolder;
+    text-decoration: none;
 }

@@ -66,6 +66,7 @@ clear.addEventListener('click', () => {
     second = "";
     first = "";
     operator = "";
+    equals.value = "";
 });
 
 
@@ -117,9 +118,14 @@ decimal.addEventListener('click', () => {
 
     }
     else if (!(second.includes('.'))) {
-
+        if(second ===''){
+            second = '0.';
+            display.textContent += second;
+        }
+        else{
         second += decimal.textContent;
         display.textContent += '.';
+        }
     }
 
 
@@ -154,8 +160,16 @@ ops.forEach((op) => {
 
 
             else if (first !== '' && operator !== '' && second === '') {
+
+                if(operator === '/' || operator === '*'){
+                    second = op.textContent;
+                    display.textContent += second;
+                    
+                }
+                else{
                 operator = op.textContent;
                 display.textContent = display.textContent.slice(0, -1) + op.textContent;
+                }
             }
             else if (first !== '' && operator !== '' && second !== '') {
 
@@ -174,6 +188,10 @@ ops.forEach((op) => {
         }
         else {
             if (second !== '' && operator === '') {
+
+                if(second ==='-'){
+                    return;
+                }
                 operator = op.textContent;
 
                 first = second;
