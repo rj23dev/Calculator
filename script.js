@@ -82,7 +82,7 @@ digits.forEach((digit) => {
             second = digit.textContent;
 
         }
-        else if (display.textContent == "ERROR can't divide by zero") {
+        else if ((display.textContent == "ERROR can't divide by zero") || (display.textContent == "Invalid Format"))  {
 
             display.textContent = digit.textContent;
             second = digit.textContent;
@@ -111,7 +111,7 @@ decimal.addEventListener('click', () => {
         second = '0.';
         display.textContent = second;
     }
-    else if (display.textContent == "ERROR can't divide by zero") {
+    else if ((display.textContent == "ERROR can't divide by zero") || (display.textContent == "Invalid Format")) {
 
         second = '0.';
         display.textContent = second;
@@ -136,7 +136,7 @@ let ops = document.querySelectorAll('.operator');
 ops.forEach((op) => {
 
     op.addEventListener('click', () => {
-        if (display.textContent == "ERROR can't divide by zero") {
+        if ((display.textContent == "ERROR can't divide by zero") || (display.textContent == "Invalid Format")) {
             display.textContent = "";
         }
         else if (op.textContent === '-') {
@@ -265,7 +265,18 @@ let equal = document.querySelector('#equal');
 equal.addEventListener('click', () => {
 
     if (first === '' || second === "" || operator === '') { return; }
+    if(isNaN(first) || isNaN(second)){
+        display.textContent = "Invalid Format";
+
+        second='';
+        first='';
+        operator='';
+
+        return;
+    }
     else {
+
+
         equals.value = operate(first, second, operator);
 
         if (isNaN(equals.value)) {
@@ -278,6 +289,8 @@ equal.addEventListener('click', () => {
             return;
 
         }
+
+        
 
         if (!(Number.isInteger(equals.value))) {
 
