@@ -4,6 +4,33 @@ A clean, fully functional calculator built with vanilla HTML, CSS, and JavaScrip
 
 Live Demo: [Calculator](https://rj23dev.github.io/Calculator/)  
 
+## Getting Started
+
+### Option 1: Open locally
+
+1. Clone the repository
+
+   ```bash
+   git clone https://github.com/rj23dev/Calculator.git
+   ```
+2. Open index.html in your browser
+
+### Option 2: Running with Docker
+
+1. Build the Docker image
+  
+   ```bash
+   docker build -t calculator .
+   ```
+2. Run the container
+
+   ```bash
+   docker run -p 8080:80 calculator
+   ```
+3. Open your browser and go to:
+
+   `http://localhost:8080`
+
 ## Features
 
 - Basic arithmetic operations: addition (+), subtraction (-), multiplication (×), division (÷)
